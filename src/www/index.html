@@ -23,18 +23,34 @@
 
     // Exercise: increment and decrement clicks starting at 0
     var ClickCounter = React.createClass({
+        getInitialState: function() {
+          return {
+            numClicks: 0
+          };
+        },
         render: function() {
             return (
                 <div>
                     <h1>Click Counter</h1>
                     <div>
-                        <button>+1</button>
-                        <button>-1</button>
+                        <button onClick={this.increment}>+1</button>
+                        <button onClick={this.decrement}>-1</button>
                     </div>
-                    <h2>Clicks: ____</h2>
+                    <h2>Clicks: {this.state.numClicks}</h2>
                 </div>
             );
+        },
+        increment() {
+          this.setState({
+            numClicks: this.state.numClicks + 1
+          });
+        },
+        decrement() {
+          this.setState({
+            numClicks: this.state.numClicks - 1
+          });
         }
+
     });
 
     var Greeting = React.createClass({
@@ -45,7 +61,6 @@
 
     ReactDOM.render(
             <div>
-                <Greeting name="Fernando" likeTo="play basketball" />
                 <ClickCounter />
             </div>,
             document.getElementById('my-react-container')
